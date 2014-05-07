@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.TmpIndustryArticleDao">  
+    
+    <select id="findTmpIACountsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Long">  
+        <![CDATA[
+	         
+		SELECT 
+			count(tmp.id) as num
+		FROM
+			tmp_industry_article tmp	
+		LEFT JOIN media_info m ON tmp.media_id = m.id			
+		WHERE 
+		
+		${whereCond}
+        ]]>
+	</select>
+    <select id="findTmpIAByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+		SELECT 
+			tmp.id,
+			tmp.title,
+			tmp.url,
+			tmp.brand_id,
+			tmp.media_id,
+			tmp.pub_time,
+			tmp.hot_count,
+			m. NAME mediaName
+		FROM
+			tmp_industry_article tmp	
+		LEFT JOIN media_info m ON tmp.media_id = m.id			
+		WHERE 
+		
+		${whereCond}
+        ]]>
+	</select>
+	
+</mapper>  

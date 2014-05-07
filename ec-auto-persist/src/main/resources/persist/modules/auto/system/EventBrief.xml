@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventBriefDao">  
+    
+    <resultMap type="EventBrief" id="EventBriefResultMap">  
+		<id 		property="eid" column="eid"/>
+		<result 	property="name" column="name"/>
+		<result 	property="startTime" column="start_time"/>
+		<result 	property="endTime" column="end_time"/>
+		<result 	property="type" column="type"/>
+		<result 	property="createTime" column="create_time"/>
+		<result 	property="lastModify" column="last_modify"/>
+		<result 	property="status" column="status"/>
+		<result 	property="depId" column="dep_id"/>
+		<result 	property="userId" column="user_id"/>
+		<result 	property="isPublic" column="is_public"/>
+		<result 	property="eventType" column="event_type"/>
+		<result 	property="eventDescription" column="event_description"/>
+		<result 	property="picPath" column="pic_path"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventBrief" resultMap="EventBriefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_brief WHERE eid = #{eid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventBrief" resultMap="EventBriefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_brief WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventBrief" resultMap="EventBriefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_brief WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventBrief" resultMap="EventBriefResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_brief WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventBriefResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_brief WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventBrief" resultMap="EventBriefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_brief        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventBrief" resultMap="EventBriefResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_brief WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(eid) FROM event_brief WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventBrief">
+    	<![CDATA[ 
+    		INSERT INTO event_brief(name,start_time,end_time,type,create_time,last_modify,status,dep_id,user_id,is_public,event_type,event_description,pic_path) VALUES (#{name},#{startTime},#{endTime},#{type},#{createTime},#{lastModify},#{status},#{depId},#{userId},#{isPublic},#{eventType},#{eventDescription},#{picPath})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="eid">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_brief SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventBrief">
+		<![CDATA[ 
+			UPDATE event_brief SET name = #{name},start_time = #{startTime},end_time = #{endTime},type = #{type},create_time = #{createTime},last_modify = #{lastModify},status = #{status},dep_id = #{depId},user_id = #{userId},is_public = #{isPublic},event_type = #{eventType},event_description = #{eventDescription},pic_path = #{picPath} WHERE eid = #{eid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventBrief">
+		<![CDATA[ 
+    		DELETE FROM event_brief WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_brief WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_brief WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

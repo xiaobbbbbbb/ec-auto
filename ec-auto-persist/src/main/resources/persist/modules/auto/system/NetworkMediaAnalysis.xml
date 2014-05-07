@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.NetworkMediaAnalysisDao">  
+    
+    <resultMap type="NetworkMediaAnalysis" id="NetworkMediaAnalysisResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="url" column="url"/>
+		<result 	property="synthesisRanking" column="synthesis_ranking"/>
+		<result 	property="visitCount" column="visit_count"/>
+		<result 	property="pageCountRanking" column="page_count_ranking"/>
+		<result 	property="avgBrowseCount" column="avg_browse_count"/>
+		<result 	property="ctime" column="ctime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="NetworkMediaAnalysis" resultMap="NetworkMediaAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM network_media_analysis WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="NetworkMediaAnalysis" resultMap="NetworkMediaAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM network_media_analysis WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="NetworkMediaAnalysis" resultMap="NetworkMediaAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM network_media_analysis WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="NetworkMediaAnalysis" resultMap="NetworkMediaAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM network_media_analysis WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="NetworkMediaAnalysisResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM network_media_analysis WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="NetworkMediaAnalysis" resultMap="NetworkMediaAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM network_media_analysis        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="NetworkMediaAnalysis" resultMap="NetworkMediaAnalysisResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM network_media_analysis WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM network_media_analysis WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="NetworkMediaAnalysis">
+    	<![CDATA[ 
+    		INSERT INTO network_media_analysis(name,url,synthesis_ranking,visit_count,page_count_ranking,avg_browse_count,ctime) VALUES (#{name},#{url},#{synthesisRanking},#{visitCount},#{pageCountRanking},#{avgBrowseCount},#{ctime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE network_media_analysis SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="NetworkMediaAnalysis">
+		<![CDATA[ 
+			UPDATE network_media_analysis SET name = #{name},url = #{url},synthesis_ranking = #{synthesisRanking},visit_count = #{visitCount},page_count_ranking = #{pageCountRanking},avg_browse_count = #{avgBrowseCount},ctime = #{ctime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="NetworkMediaAnalysis">
+		<![CDATA[ 
+    		DELETE FROM network_media_analysis WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM network_media_analysis WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM network_media_analysis WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

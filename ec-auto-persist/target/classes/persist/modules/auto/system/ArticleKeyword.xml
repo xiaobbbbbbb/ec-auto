@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.ArticleKeywordDao">  
+    
+    <resultMap type="ArticleKeyword" id="ArticleKeywordResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="articleId" column="article_id"/>
+		<result 	property="keywordId" column="keyword_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="ArticleKeyword" resultMap="ArticleKeywordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_keyword WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="ArticleKeyword" resultMap="ArticleKeywordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_keyword WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="ArticleKeyword" resultMap="ArticleKeywordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_keyword WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ArticleKeyword" resultMap="ArticleKeywordResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM article_keyword WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="ArticleKeywordResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM article_keyword WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="ArticleKeyword" resultMap="ArticleKeywordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_keyword        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ArticleKeyword" resultMap="ArticleKeywordResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM article_keyword WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM article_keyword WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="ArticleKeyword">
+    	<![CDATA[ 
+    		INSERT INTO article_keyword(id,article_id,keyword_id) VALUES (#{id},#{articleId},#{keywordId})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE article_keyword SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="ArticleKeyword">
+		<![CDATA[ 
+			UPDATE article_keyword SET id = #{id},article_id = #{articleId},keyword_id = #{keywordId} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="ArticleKeyword">
+		<![CDATA[ 
+    		DELETE FROM article_keyword WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM article_keyword WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM article_keyword WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

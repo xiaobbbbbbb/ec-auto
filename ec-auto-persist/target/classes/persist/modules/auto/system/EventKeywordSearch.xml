@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventKeywordSearchDao">  
+    
+    <resultMap type="EventKeywordSearch" id="EventKeywordSearchResultMap">  
+		<id 		property="ksid" column="ksid"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="keywords" column="keywords"/>
+		<result 	property="insertTime" column="insert_time"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventKeywordSearch" resultMap="EventKeywordSearchResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_keyword_search WHERE ksid = #{ksid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventKeywordSearch" resultMap="EventKeywordSearchResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_keyword_search WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventKeywordSearch" resultMap="EventKeywordSearchResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_keyword_search WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventKeywordSearch" resultMap="EventKeywordSearchResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_keyword_search WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventKeywordSearchResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_keyword_search WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventKeywordSearch" resultMap="EventKeywordSearchResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_keyword_search        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventKeywordSearch" resultMap="EventKeywordSearchResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_keyword_search WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(ksid) FROM event_keyword_search WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventKeywordSearch">
+    	<![CDATA[ 
+    		INSERT INTO event_keyword_search(eid,keywords,insert_time) VALUES (#{eid},#{keywords},#{insertTime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="ksid">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_keyword_search SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventKeywordSearch">
+		<![CDATA[ 
+			UPDATE event_keyword_search SET eid = #{eid},keywords = #{keywords},insert_time = #{insertTime} WHERE ksid = #{ksid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventKeywordSearch">
+		<![CDATA[ 
+    		DELETE FROM event_keyword_search WHERE ksid = #{ksid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_keyword_search WHERE ksid = #{ksid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_keyword_search WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

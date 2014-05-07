@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventKeyWordsDao">  
+    
+    <resultMap type="EventKeyWords" id="EventKeyWordsResultMap">  
+		<id 		property="kid" column="kid"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="keywords" column="keywords"/>
+		<result 	property="relation" column="relation"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventKeyWords" resultMap="EventKeyWordsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_key_words WHERE kid = #{kid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventKeyWords" resultMap="EventKeyWordsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_key_words WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventKeyWords" resultMap="EventKeyWordsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_key_words WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventKeyWords" resultMap="EventKeyWordsResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_key_words WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventKeyWordsResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_key_words WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventKeyWords" resultMap="EventKeyWordsResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_key_words        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventKeyWords" resultMap="EventKeyWordsResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_key_words WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(kid) FROM event_key_words WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventKeyWords">
+    	<![CDATA[ 
+    		INSERT INTO event_key_words(eid,keywords,relation) VALUES (#{eid},#{keywords},#{relation})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="kid">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_key_words SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventKeyWords">
+		<![CDATA[ 
+			UPDATE event_key_words SET eid = #{eid},keywords = #{keywords},relation = #{relation} WHERE kid = #{kid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventKeyWords">
+		<![CDATA[ 
+    		DELETE FROM event_key_words WHERE kid = #{kid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_key_words WHERE kid = #{kid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_key_words WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventAnalysisStatisticDao">  
+    
+    <resultMap type="EventAnalysisStatistic" id="EventAnalysisStatisticResultMap">  
+		<id 		property="eid" column="eid"/>
+		<id 		property="type" column="type"/>
+		<id 		property="dayTime" column="day_time"/>
+		<result 	property="positive" column="positive"/>
+		<result 	property="negative" column="negative"/>
+		<result 	property="normal" column="normal"/>
+		<result 	property="total" column="total"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventAnalysisStatistic" resultMap="EventAnalysisStatisticResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_statistic WHERE day_time = #{dayTime}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventAnalysisStatistic" resultMap="EventAnalysisStatisticResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_statistic WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventAnalysisStatistic" resultMap="EventAnalysisStatisticResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_statistic WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventAnalysisStatistic" resultMap="EventAnalysisStatisticResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_analysis_statistic WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventAnalysisStatisticResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_analysis_statistic WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventAnalysisStatistic" resultMap="EventAnalysisStatisticResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_statistic        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventAnalysisStatistic" resultMap="EventAnalysisStatisticResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_analysis_statistic WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(day_time) FROM event_analysis_statistic WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventAnalysisStatistic">
+    	<![CDATA[ 
+    		INSERT INTO event_analysis_statistic(eid,type,day_time,positive,negative,normal,total) VALUES (#{eid},#{type},#{dayTime},#{positive},#{negative},#{normal},#{total})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_analysis_statistic SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventAnalysisStatistic">
+		<![CDATA[ 
+			UPDATE event_analysis_statistic SET eid = #{eid},type = #{type},day_time = #{dayTime},positive = #{positive},negative = #{negative},normal = #{normal},total = #{total} WHERE day_time = #{dayTime}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventAnalysisStatistic">
+		<![CDATA[ 
+    		DELETE FROM event_analysis_statistic WHERE day_time = #{dayTime}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Date">
+		<![CDATA[ 
+    		DELETE FROM event_analysis_statistic WHERE day_time = #{dayTime}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_analysis_statistic WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

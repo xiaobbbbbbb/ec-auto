@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventAnalysisDao">  
+    
+    <resultMap type="EventAnalysis" id="EventAnalysisResultMap">  
+		<id 		property="eaid" column="eaid"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="sourcetype" column="sourcetype"/>
+		<result 	property="sourceid" column="sourceid"/>
+		<result 	property="pubtime" column="pubtime"/>
+		<result 	property="content" column="content"/>
+		<result 	property="refLevel" column="ref_level"/>
+		<result 	property="reliable" column="reliable"/>
+		<result 	property="eacid" column="eacid"/>
+		<result 	property="url" column="url"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventAnalysis" resultMap="EventAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis WHERE eaid = #{eaid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventAnalysis" resultMap="EventAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventAnalysis" resultMap="EventAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventAnalysis" resultMap="EventAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_analysis WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventAnalysisResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_analysis WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventAnalysis" resultMap="EventAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventAnalysis" resultMap="EventAnalysisResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_analysis WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(eaid) FROM event_analysis WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventAnalysis">
+    	<![CDATA[ 
+    		INSERT INTO event_analysis(eid,sourcetype,sourceid,pubtime,content,ref_level,reliable,eacid,url) VALUES (#{eid},#{sourcetype},#{sourceid},#{pubtime},#{content},#{refLevel},#{reliable},#{eacid},#{url})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="eaid">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_analysis SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventAnalysis">
+		<![CDATA[ 
+			UPDATE event_analysis SET eid = #{eid},sourcetype = #{sourcetype},sourceid = #{sourceid},pubtime = #{pubtime},content = #{content},ref_level = #{refLevel},reliable = #{reliable},eacid = #{eacid},url = #{url} WHERE eaid = #{eaid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventAnalysis">
+		<![CDATA[ 
+    		DELETE FROM event_analysis WHERE eaid = #{eaid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_analysis WHERE eaid = #{eaid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_analysis WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

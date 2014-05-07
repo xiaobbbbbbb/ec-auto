@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.DictCarBrandDao">  
+    <select id="findCarbrandCountsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Long">  
+        <![CDATA[
+	         
+		SELECT 
+			count(d.id) as num
+		FROM
+			dict_car_brand d	
+		LEFT JOIN ral_user r ON d.edit_uid = r.user_id				
+		WHERE 
+		
+		${whereCond}
+        ]]>
+	</select>
+    <select id="findCarbrandByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+		SELECT 
+			d.id,
+			d.name,
+			d.is_valid isValid,
+			d.type,
+			d.edit_uid,
+			d.edit_datetime editTime,
+			r.name editName
+		FROM
+			dict_car_brand d
+		LEFT JOIN ral_user r ON d.edit_uid = r.user_id
+		WHERE 
+		
+		${whereCond}
+        ]]>
+	</select>
+</mapper>  

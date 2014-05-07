@@ -1,0 +1,34 @@
+.update_a{
+	display: block;
+	float: left;
+	height: 28px;
+	width: 28px;
+	margin-left: 10px;
+	background-image: url("../images/update_a.png");
+}
+.update_a_td{
+	height: 28px;
+	width: 28px;
+	background-image: url("../images/update_a.png");
+	display: block;
+	float:right;
+	margin-left: 10px;
+}
+.index_event_switch{
+	display: block;
+	width: 87px;
+	height: 16px;
+	margin: 0px auto;
+}
+.event_switch_td{
+	float: none;
+	display: block;
+	float:right;
+	margin-left: 10px;
+}
+.on{
+	background-image: url("../../media/images/event_on.png");
+}
+.off{
+	background-image: url("../../media/images/event_off.png");
+}

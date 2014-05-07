@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventIdProcessedDao">  
+    
+    <resultMap type="EventIdProcessed" id="EventIdProcessedResultMap">  
+		<id 		property="eid" column="eid"/>
+		<id 		property="infotype" column="infotype"/>
+		<id 		property="kid" column="kid"/>
+		<result 	property="processAutoId" column="process_auto_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventIdProcessed" resultMap="EventIdProcessedResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_id_processed WHERE kid = #{kid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventIdProcessed" resultMap="EventIdProcessedResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_id_processed WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventIdProcessed" resultMap="EventIdProcessedResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_id_processed WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventIdProcessed" resultMap="EventIdProcessedResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_id_processed WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventIdProcessedResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_id_processed WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventIdProcessed" resultMap="EventIdProcessedResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_id_processed        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventIdProcessed" resultMap="EventIdProcessedResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_id_processed WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(kid) FROM event_id_processed WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventIdProcessed">
+    	<![CDATA[ 
+    		INSERT INTO event_id_processed(eid,infotype,process_auto_id,kid) VALUES (#{eid},#{infotype},#{processAutoId},#{kid})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_id_processed SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventIdProcessed">
+		<![CDATA[ 
+			UPDATE event_id_processed SET eid = #{eid},infotype = #{infotype},process_auto_id = #{processAutoId},kid = #{kid} WHERE kid = #{kid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventIdProcessed">
+		<![CDATA[ 
+    		DELETE FROM event_id_processed WHERE kid = #{kid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_id_processed WHERE kid = #{kid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_id_processed WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

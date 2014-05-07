@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.DictCityDao">  
+    
+    <resultMap type="DictCity" id="DictCityResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="proId" column="pro_id"/>
+		<result 	property="areaId" column="area_id"/>
+		<result 	property="keyTitle" column="key_title"/>
+		<result 	property="status" column="status"/>
+		<result 	property="noInfo" column="no_info"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="DictCity" resultMap="DictCityResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM dict_city WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="DictCity" resultMap="DictCityResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM dict_city WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="DictCity" resultMap="DictCityResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM dict_city WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="DictCity" resultMap="DictCityResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM dict_city WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="DictCityResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM dict_city WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="DictCity" resultMap="DictCityResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM dict_city        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="DictCity" resultMap="DictCityResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM dict_city WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM dict_city WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="DictCity">
+    	<![CDATA[ 
+    		INSERT INTO dict_city(name,pro_id,area_id,key_title,status,no_info) VALUES (#{name},#{proId},#{areaId},#{keyTitle},#{status},#{noInfo})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE dict_city SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="DictCity">
+		<![CDATA[ 
+			UPDATE dict_city SET name = #{name},pro_id = #{proId},area_id = #{areaId},key_title = #{keyTitle},status = #{status},no_info = #{noInfo} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="DictCity">
+		<![CDATA[ 
+    		DELETE FROM dict_city WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM dict_city WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM dict_city WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.ViewpointDao">  
+    
+    <resultMap type="Viewpoint" id="ViewpointResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="isManual" column="is_manual"/>
+		<result 	property="affection" column="affection"/>
+		<result 	property="isValid" column="is_valid"/>
+		<result 	property="ctime" column="ctime"/>
+		<result 	property="status" column="status"/>
+		<result 	property="viewpointTypeId" column="viewpoint_type_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="Viewpoint" resultMap="ViewpointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM viewpoint WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="Viewpoint" resultMap="ViewpointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM viewpoint WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="Viewpoint" resultMap="ViewpointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM viewpoint WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Viewpoint" resultMap="ViewpointResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM viewpoint WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="ViewpointResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM viewpoint WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="Viewpoint" resultMap="ViewpointResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM viewpoint        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Viewpoint" resultMap="ViewpointResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM viewpoint WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM viewpoint WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="Viewpoint">
+    	<![CDATA[ 
+    		INSERT INTO viewpoint(name,is_manual,affection,is_valid,ctime,status,viewpoint_type_id) VALUES (#{name},#{isManual},#{affection},#{isValid},#{ctime},#{status},#{viewpointTypeId})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE viewpoint SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="Viewpoint">
+		<![CDATA[ 
+			UPDATE viewpoint SET name = #{name},is_manual = #{isManual},affection = #{affection},is_valid = #{isValid},ctime = #{ctime},status = #{status},viewpoint_type_id = #{viewpointTypeId} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="Viewpoint">
+		<![CDATA[ 
+    		DELETE FROM viewpoint WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM viewpoint WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM viewpoint WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

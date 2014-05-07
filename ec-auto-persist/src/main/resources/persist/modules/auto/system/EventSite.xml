@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventSiteDao">  
+    
+    <resultMap type="EventSite" id="EventSiteResultMap">  
+		<id 		property="esid" column="esid"/>
+		<id 		property="eid" column="eid"/>
+		<result 	property="siteName" column="site_name"/>
+		<result 	property="channelName" column="channel_name"/>
+		<result 	property="url" column="url"/>
+		<result 	property="type" column="type"/>
+		<result 	property="updateTime" column="update_time"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventSite" resultMap="EventSiteResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_site WHERE eid = #{eid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventSite" resultMap="EventSiteResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_site WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventSite" resultMap="EventSiteResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_site WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventSite" resultMap="EventSiteResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_site WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventSiteResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_site WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventSite" resultMap="EventSiteResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_site        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventSite" resultMap="EventSiteResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_site WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(eid) FROM event_site WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventSite">
+    	<![CDATA[ 
+    		INSERT INTO event_site(esid,eid,site_name,channel_name,url,type,update_time) VALUES (#{esid},#{eid},#{siteName},#{channelName},#{url},#{type},#{updateTime})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_site SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventSite">
+		<![CDATA[ 
+			UPDATE event_site SET esid = #{esid},eid = #{eid},site_name = #{siteName},channel_name = #{channelName},url = #{url},type = #{type},update_time = #{updateTime} WHERE eid = #{eid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventSite">
+		<![CDATA[ 
+    		DELETE FROM event_site WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_site WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_site WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

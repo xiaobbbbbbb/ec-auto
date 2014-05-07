@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.WeiboAnalysisDao">  
+    
+    <resultMap type="WeiboAnalysis" id="WeiboAnalysisResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="name" column="name"/>
+		<result 	property="url" column="url"/>
+		<result 	property="mediaId" column="media_id"/>
+		<result 	property="fansCount" column="fans_count"/>
+		<result 	property="aboutArticleCount" column="about_article_count"/>
+		<result 	property="avgTransmitCount" column="avg_transmit_count"/>
+		<result 	property="avgCommentCount" column="avg_comment_count"/>
+		<result 	property="provinceId" column="province_id"/>
+		<result 	property="cityId" column="city_id"/>
+		<result 	property="ctime" column="ctime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="WeiboAnalysis" resultMap="WeiboAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM weibo_analysis WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="WeiboAnalysis" resultMap="WeiboAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM weibo_analysis WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="WeiboAnalysis" resultMap="WeiboAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM weibo_analysis WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WeiboAnalysis" resultMap="WeiboAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM weibo_analysis WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="WeiboAnalysisResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM weibo_analysis WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="WeiboAnalysis" resultMap="WeiboAnalysisResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM weibo_analysis        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="WeiboAnalysis" resultMap="WeiboAnalysisResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM weibo_analysis WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM weibo_analysis WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="WeiboAnalysis">
+    	<![CDATA[ 
+    		INSERT INTO weibo_analysis(name,url,media_id,fans_count,about_article_count,avg_transmit_count,avg_comment_count,province_id,city_id,ctime) VALUES (#{name},#{url},#{mediaId},#{fansCount},#{aboutArticleCount},#{avgTransmitCount},#{avgCommentCount},#{provinceId},#{cityId},#{ctime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE weibo_analysis SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="WeiboAnalysis">
+		<![CDATA[ 
+			UPDATE weibo_analysis SET name = #{name},url = #{url},media_id = #{mediaId},fans_count = #{fansCount},about_article_count = #{aboutArticleCount},avg_transmit_count = #{avgTransmitCount},avg_comment_count = #{avgCommentCount},province_id = #{provinceId},city_id = #{cityId},ctime = #{ctime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="WeiboAnalysis">
+		<![CDATA[ 
+    		DELETE FROM weibo_analysis WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM weibo_analysis WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM weibo_analysis WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

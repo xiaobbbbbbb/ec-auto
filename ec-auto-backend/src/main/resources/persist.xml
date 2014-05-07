@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/context
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd
+          http://www.springframework.org/schema/beans
+          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+          http://www.springframework.org/schema/aop
+          http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+          http://www.springframework.org/schema/mvc
+          http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<!-- <bean id="exceptionResolver" class="com.ecarinfo.web.exceptionresolver.CommonExceptionResolver" 
+		autowire="byName" /> -->
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"
+		init-method="init" destroy-method="close">
+		<property name="url" value="${jdbc_url}" />
+		<property name="username" value="${jdbc_username}" />
+		<property name="password" value="${jdbc_password}" />
+
+		<property name="initialSize" value="0" />
+		<property name="maxActive" value="20" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="0" />
+		<property name="maxWait" value="60000" />
+
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="testWhileIdle" value="true" />
+
+		<!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+		<property name="timeBetweenEvictionRunsMillis" value="60000" />
+		<!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+		<property name="minEvictableIdleTimeMillis" value="25200000" />
+
+		<!-- 打开removeAbandoned功能 -->
+		<property name="removeAbandoned" value="true" />
+		<!-- 1800秒，也就是30分钟 -->
+		<property name="removeAbandonedTimeout" value="1800" />
+		<!-- 关闭Abanded连接时输出错误日志 -->
+		<property name="logAbandoned" value="true" />
+
+		<!-- 监控数据库 -->
+		<property name="filters" value="mergeStat" />
+	</bean>
+	<!--  tomcat7 自带的高性能数据库连接池 -->
+	<!--
+	<bean id="poolProperties" class="org.apache.tomcat.jdbc.pool.PoolProperties">
+		<property name="url" value="${jdbc_url}" />
+		<property name="driverClassName" value="${jdbc_driverClassName}" />
+		<property name="username" value="${jdbc_username}" />
+		<property name="password" value="${jdbc_password}" />		
+		<property name="jmxEnabled" value="true" />
+		<property name="testWhileIdle" value="false" />
+		<property name="testOnBorrow" value="true" />
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testOnReturn" value="false" />
+		<property name="validationInterval" value="30000" />
+		<property name="timeBetweenEvictionRunsMillis" value="30000" />	
+		<property name="initialSize" value="0" />
+		<property name="maxActive" value="20" />
+		<property name="maxIdle" value="20" />
+		<property name="minIdle" value="0" />
+		<property name="maxWait" value="60000" />		
+		<property name="removeAbandonedTimeout" value="60" />
+		<property name="minEvictableIdleTimeMillis" value="30000" />
+		<property name="logAbandoned" value="true" />
+		<property name="removeAbandoned" value="true" />
+	</bean>	
+	<bean id="tomcat7DataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+		<property name="poolProperties" ref="poolProperties"/>
+	</bean>
+	-->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.ecarinfo.auto.po;" />
+		<property name="mapperLocations" value="classpath*:persist/**/*.xml" />
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.ecarinfo.**.dao" />
+	</bean>
+</beans>

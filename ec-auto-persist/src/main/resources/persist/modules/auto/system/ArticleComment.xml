@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.ArticleCommentDao">  
+    
+    <resultMap type="ArticleComment" id="ArticleCommentResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="articleId" column="article_id"/>
+		<result 	property="content" column="content"/>
+		<result 	property="affection" column="affection"/>
+		<result 	property="ctime" column="ctime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="ArticleComment" resultMap="ArticleCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_comment WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="ArticleComment" resultMap="ArticleCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_comment WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="ArticleComment" resultMap="ArticleCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_comment WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ArticleComment" resultMap="ArticleCommentResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM article_comment WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="ArticleCommentResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM article_comment WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="ArticleComment" resultMap="ArticleCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM article_comment        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="ArticleComment" resultMap="ArticleCommentResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM article_comment WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM article_comment WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="ArticleComment">
+    	<![CDATA[ 
+    		INSERT INTO article_comment(article_id,content,affection,ctime) VALUES (#{articleId},#{content},#{affection},#{ctime})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE article_comment SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="ArticleComment">
+		<![CDATA[ 
+			UPDATE article_comment SET article_id = #{articleId},content = #{content},affection = #{affection},ctime = #{ctime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="ArticleComment">
+		<![CDATA[ 
+    		DELETE FROM article_comment WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM article_comment WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM article_comment WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

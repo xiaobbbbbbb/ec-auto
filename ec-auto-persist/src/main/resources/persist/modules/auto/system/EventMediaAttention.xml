@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventMediaAttentionDao">  
+    
+    <resultMap type="EventMediaAttention" id="EventMediaAttentionResultMap">  
+		<id 		property="emid" column="emid"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="esid" column="esid"/>
+		<result 	property="mediaType" column="mediaType"/>
+		<result 	property="pubtime" column="pubtime"/>
+		<result 	property="siteName" column="siteName"/>
+		<result 	property="dataNumber" column="dataNumber"/>
+		<result 	property="updateTime" column="updateTime"/>
+		<result 	property="siteid" column="siteid"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventMediaAttention" resultMap="EventMediaAttentionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_media_attention WHERE emid = #{emid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventMediaAttention" resultMap="EventMediaAttentionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_media_attention WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventMediaAttention" resultMap="EventMediaAttentionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_media_attention WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventMediaAttention" resultMap="EventMediaAttentionResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_media_attention WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventMediaAttentionResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_media_attention WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventMediaAttention" resultMap="EventMediaAttentionResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_media_attention        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventMediaAttention" resultMap="EventMediaAttentionResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_media_attention WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(emid) FROM event_media_attention WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventMediaAttention">
+    	<![CDATA[ 
+    		INSERT INTO event_media_attention(eid,esid,mediaType,pubtime,siteName,dataNumber,updateTime,siteid) VALUES (#{eid},#{esid},#{mediaType},#{pubtime},#{siteName},#{dataNumber},#{updateTime},#{siteid})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="emid">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_media_attention SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventMediaAttention">
+		<![CDATA[ 
+			UPDATE event_media_attention SET eid = #{eid},esid = #{esid},mediaType = #{mediaType},pubtime = #{pubtime},siteName = #{siteName},dataNumber = #{dataNumber},updateTime = #{updateTime},siteid = #{siteid} WHERE emid = #{emid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventMediaAttention">
+		<![CDATA[ 
+    		DELETE FROM event_media_attention WHERE emid = #{emid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_media_attention WHERE emid = #{emid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_media_attention WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

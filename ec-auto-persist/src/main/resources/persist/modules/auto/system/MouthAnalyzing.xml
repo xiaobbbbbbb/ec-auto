@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.MouthAnalyzingDao">  
+    
+    <resultMap type="MouthAnalyzing" id="MouthAnalyzingResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="optionId" column="option_id"/>
+		<result 	property="title" column="title"/>
+		<result 	property="content" column="content"/>
+		<result 	property="url" column="url"/>
+		<result 	property="brandId" column="brand_id"/>
+		<result 	property="serialId" column="serial_id"/>
+		<result 	property="provinceId" column="province_id"/>
+		<result 	property="cityId" column="city_id"/>
+		<result 	property="mediaId" column="media_id"/>
+		<result 	property="type" column="type"/>
+		<result 	property="affection" column="affection"/>
+		<result 	property="points" column="points"/>
+		<result 	property="appearance" column="appearance"/>
+		<result 	property="appearanceAffection" column="appearance_affection"/>
+		<result 	property="interior" column="interior"/>
+		<result 	property="interiorAffection" column="interior_affection"/>
+		<result 	property="space" column="space"/>
+		<result 	property="spaceAffection" column="space_affection"/>
+		<result 	property="operate" column="operate"/>
+		<result 	property="operateAffection" column="operate_affection"/>
+		<result 	property="power" column="power"/>
+		<result 	property="powerAffection" column="power_affection"/>
+		<result 	property="oil" column="oil"/>
+		<result 	property="oilAffection" column="oil_affection"/>
+		<result 	property="comfort" column="comfort"/>
+		<result 	property="comfortAffection" column="comfort_affection"/>
+		<result 	property="configure" column="configure"/>
+		<result 	property="configureAffection" column="configure_affection"/>
+		<result 	property="price" column="price"/>
+		<result 	property="priceAffection" column="price_affection"/>
+		<result 	property="quality" column="quality"/>
+		<result 	property="qualityAffection" column="quality_affection"/>
+		<result 	property="cost" column="cost"/>
+		<result 	property="costAffection" column="cost_affection"/>
+		<result 	property="maintenance" column="maintenance"/>
+		<result 	property="maintenanceAffection" column="maintenance_affection"/>
+		<result 	property="attitude" column="attitude"/>
+		<result 	property="attitudeAffection" column="attitude_affection"/>
+		<result 	property="facility" column="facility"/>
+		<result 	property="facilityAffection" column="facility_affection"/>
+		<result 	property="stafflevel" column="stafflevel"/>
+		<result 	property="stafflevelAffection" column="stafflevel_affection"/>
+		<result 	property="pubTime" column="pub_time"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="MouthAnalyzing" resultMap="MouthAnalyzingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM mouth_analyzing WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="MouthAnalyzing" resultMap="MouthAnalyzingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM mouth_analyzing WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="MouthAnalyzing" resultMap="MouthAnalyzingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM mouth_analyzing WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="MouthAnalyzing" resultMap="MouthAnalyzingResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM mouth_analyzing WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="MouthAnalyzingResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM mouth_analyzing WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="MouthAnalyzing" resultMap="MouthAnalyzingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM mouth_analyzing        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="MouthAnalyzing" resultMap="MouthAnalyzingResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM mouth_analyzing WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM mouth_analyzing WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="MouthAnalyzing">
+    	<![CDATA[ 
+    		INSERT INTO mouth_analyzing(option_id,title,content,url,brand_id,serial_id,province_id,city_id,media_id,type,affection,points,appearance,appearance_affection,interior,interior_affection,space,space_affection,operate,operate_affection,power,power_affection,oil,oil_affection,comfort,comfort_affection,configure,configure_affection,price,price_affection,quality,quality_affection,cost,cost_affection,maintenance,maintenance_affection,attitude,attitude_affection,facility,facility_affection,stafflevel,stafflevel_affection,pub_time) VALUES (#{optionId},#{title},#{content},#{url},#{brandId},#{serialId},#{provinceId},#{cityId},#{mediaId},#{type},#{affection},#{points},#{appearance},#{appearanceAffection},#{interior},#{interiorAffection},#{space},#{spaceAffection},#{operate},#{operateAffection},#{power},#{powerAffection},#{oil},#{oilAffection},#{comfort},#{comfortAffection},#{configure},#{configureAffection},#{price},#{priceAffection},#{quality},#{qualityAffection},#{cost},#{costAffection},#{maintenance},#{maintenanceAffection},#{attitude},#{attitudeAffection},#{facility},#{facilityAffection},#{stafflevel},#{stafflevelAffection},#{pubTime})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE mouth_analyzing SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="MouthAnalyzing">
+		<![CDATA[ 
+			UPDATE mouth_analyzing SET option_id = #{optionId},title = #{title},content = #{content},url = #{url},brand_id = #{brandId},serial_id = #{serialId},province_id = #{provinceId},city_id = #{cityId},media_id = #{mediaId},type = #{type},affection = #{affection},points = #{points},appearance = #{appearance},appearance_affection = #{appearanceAffection},interior = #{interior},interior_affection = #{interiorAffection},space = #{space},space_affection = #{spaceAffection},operate = #{operate},operate_affection = #{operateAffection},power = #{power},power_affection = #{powerAffection},oil = #{oil},oil_affection = #{oilAffection},comfort = #{comfort},comfort_affection = #{comfortAffection},configure = #{configure},configure_affection = #{configureAffection},price = #{price},price_affection = #{priceAffection},quality = #{quality},quality_affection = #{qualityAffection},cost = #{cost},cost_affection = #{costAffection},maintenance = #{maintenance},maintenance_affection = #{maintenanceAffection},attitude = #{attitude},attitude_affection = #{attitudeAffection},facility = #{facility},facility_affection = #{facilityAffection},stafflevel = #{stafflevel},stafflevel_affection = #{stafflevelAffection},pub_time = #{pubTime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="MouthAnalyzing">
+		<![CDATA[ 
+    		DELETE FROM mouth_analyzing WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM mouth_analyzing WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM mouth_analyzing WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

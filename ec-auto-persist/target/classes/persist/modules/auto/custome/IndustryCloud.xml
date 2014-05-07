@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.IndustryCloudDao">  
+    
+    <select id="countIndustryArticleByCloudId" resultType="Long">  
+        <![CDATA[
+			SELECT
+				count(a.id)
+			FROM
+				industry_article a
+			JOIN industry_cloud c ON c.industry_article_id = a.id
+			WHERE a.status=1 AND c.cloud_id = #{cloudId}
+        ]]>
+	</select>
+	
+	<select id="findIndustryArticleByCloudId" resultType="hashmap">  
+        <![CDATA[
+			SELECT
+				a.id,
+				a.title,
+				a.pub_time AS pub_date,
+				a.url,
+				m. NAME mediaName
+			FROM
+				industry_article a
+			JOIN industry_cloud c ON c.industry_article_id = a.id 
+			LEFT JOIN media_info m ON a.media_id = m.id
+			WHERE a.status=1 AND c.cloud_id = #{cloudId}
+			ORDER BY a.pub_time DESC
+			limit #{offset},#{rowsPerPage}
+        ]]>
+	</select>
+	
+</mapper>  

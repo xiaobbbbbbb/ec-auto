@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventBlogRefDao">  
+    
+    <resultMap type="EventBlogRef" id="EventBlogRefResultMap">  
+    	<id 		property="idxId" column="idx_id"/>
+		<result 	property="id" column="id"/>
+		<result 	property="site" column="site"/>
+		<result 	property="pubtime" column="pubtime"/>
+		<result 	property="reliable" column="reliable"/>
+		<result 	property="alarmLevel" column="alarm_level"/>
+		<result 	property="cjGenus" column="cj_genus"/>
+		<result 	property="fxGenus" column="fx_genus"/>
+		<result 	property="isPic" column="is_pic"/>
+		<result 	property="cusScore" column="cus_score"/>
+		<result 	property="cmtCount" column="cmt_count"/>
+		<result 	property="summary" column="summary"/>
+		<result 	property="alarmKeyword" column="alarm_keyword"/>
+		<result 	property="supportLevel" column="support_level"/>
+		<result 	property="dupCount" column="dup_count"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="refLevel" column="ref_level"/>
+		<result 	property="title" column="title"/>
+		<result 	property="sentence" column="sentence"/>
+		<result 	property="pubdate" column="pubdate"/>
+		<result 	property="dupId" column="dup_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventBlogRef" resultMap="EventBlogRefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_blog_ref WHERE idx_id = #{idxId}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventBlogRef" resultMap="EventBlogRefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_blog_ref WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventBlogRef" resultMap="EventBlogRefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_blog_ref WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventBlogRef" resultMap="EventBlogRefResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_blog_ref WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventBlogRefResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_blog_ref WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventBlogRef" resultMap="EventBlogRefResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_blog_ref        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventBlogRef" resultMap="EventBlogRefResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_blog_ref WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(idx_id) FROM event_blog_ref WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventBlogRef">
+    	<![CDATA[ 
+    		INSERT INTO event_blog_ref(id,site,pubtime,reliable,alarm_level,cj_genus,fx_genus,is_pic,cus_score,cmt_count,summary,alarm_keyword,support_level,dup_count,eid,ref_level,title,sentence,pubdate,dup_id) VALUES (#{id},#{site},#{pubtime},#{reliable},#{alarmLevel},#{cjGenus},#{fxGenus},#{isPic},#{cusScore},#{cmtCount},#{summary},#{alarmKeyword},#{supportLevel},#{dupCount},#{eid},#{refLevel},#{title},#{sentence},#{pubdate},#{dupId})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="idxId">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_blog_ref SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventBlogRef">
+		<![CDATA[ 
+			UPDATE event_blog_ref SET id = #{id},site = #{site},pubtime = #{pubtime},reliable = #{reliable},alarm_level = #{alarmLevel},cj_genus = #{cjGenus},fx_genus = #{fxGenus},is_pic = #{isPic},cus_score = #{cusScore},cmt_count = #{cmtCount},summary = #{summary},alarm_keyword = #{alarmKeyword},support_level = #{supportLevel},dup_count = #{dupCount},eid = #{eid},ref_level = #{refLevel},title = #{title},sentence = #{sentence},pubdate = #{pubdate},dup_id = #{dupId} WHERE idx_id = #{idxId}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventBlogRef">
+		<![CDATA[ 
+    		DELETE FROM event_blog_ref WHERE idx_id = #{idxId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_blog_ref WHERE idx_id = #{idxId}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_blog_ref WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

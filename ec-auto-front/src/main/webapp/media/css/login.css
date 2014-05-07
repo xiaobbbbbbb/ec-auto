@@ -1,0 +1,63 @@
+body{
+background-image: url("../../media/images/login_bg.png");
+	
+}
+
+.main{
+	width:577px;
+	height:140px;
+	
+	margin:0px auto;
+	margin-top:250px;
+}
+.input_name,.input_passwd{
+	margin-top:20px;
+	float: left;
+	width:217px;
+	height:39px;
+	background-image: url("../../media/images/login_name.gif");
+	background-repeat: no-repeat;
+}
+
+
+.input_passwd{
+	margin-left:20px;
+	background-image: url("../../media/images/login_passwd.gif");
+}
+
+#name,#name_text,#passwd,#passwd_text{
+	widht:170px;
+	height:22px;
+	line-height:22px;
+	margin-top:7px;
+	margin-left:40px;
+	border:none;
+	font-size:14px;
+	color:#707070;
+	background-color: transparent;
+}
+
+#passwd_text,#name_text{
+	position: absolute;
+	margin-left:50px;
+}
+
+#submit{
+	margin-left:20px;
+	margin-top:20px;
+	float:left;
+	width:99px;
+	height:40px;
+	line-height:40px;
+	color:#ffffff;
+	border:none;
+	background-color:transparent;
+	background-image: url("../../media/images/login_btn.gif");
+	background-repeat: no-repeat;
+	cursor: pointer;
+}
+
+#submit:HOVER{
+	color:#000000;
+}
+

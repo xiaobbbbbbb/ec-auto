@@ -1,0 +1,4 @@
+.hot-cloud-tag {background-color:#f0f0f0;position:relative;overflow: hidden;width:458px;height: 244px}
+.hot-cloud-tag a {white-space:nowrap;position:absolute; top:0px; left:0px;  color:#000; font-weight:bold; text-decoration:none; padding: 3px 6px; }
+.hot-cloud-tag a:hover {border: 1px solid #eee; background: #FFF; }
+.hot-cloud-tag table {position:absolute; top:10px; left:10px;	}

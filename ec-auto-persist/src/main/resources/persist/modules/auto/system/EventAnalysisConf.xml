@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventAnalysisConfDao">  
+    
+    <resultMap type="EventAnalysisConf" id="EventAnalysisConfResultMap">  
+		<id 		property="eacid" column="eacid"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="type" column="type"/>
+		<result 	property="content" column="content"/>
+		<result 	property="intime" column="intime"/>
+		<result 	property="updatetime" column="updatetime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventAnalysisConf" resultMap="EventAnalysisConfResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_conf WHERE eacid = #{eacid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventAnalysisConf" resultMap="EventAnalysisConfResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_conf WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventAnalysisConf" resultMap="EventAnalysisConfResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_conf WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventAnalysisConf" resultMap="EventAnalysisConfResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_analysis_conf WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventAnalysisConfResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_analysis_conf WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventAnalysisConf" resultMap="EventAnalysisConfResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_analysis_conf        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventAnalysisConf" resultMap="EventAnalysisConfResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_analysis_conf WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(eacid) FROM event_analysis_conf WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventAnalysisConf">
+    	<![CDATA[ 
+    		INSERT INTO event_analysis_conf(eid,type,content,intime,updatetime) VALUES (#{eid},#{type},#{content},#{intime},#{updatetime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="eacid">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_analysis_conf SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventAnalysisConf">
+		<![CDATA[ 
+			UPDATE event_analysis_conf SET eid = #{eid},type = #{type},content = #{content},intime = #{intime},updatetime = #{updatetime} WHERE eacid = #{eacid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventAnalysisConf">
+		<![CDATA[ 
+    		DELETE FROM event_analysis_conf WHERE eacid = #{eacid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_analysis_conf WHERE eacid = #{eacid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_analysis_conf WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

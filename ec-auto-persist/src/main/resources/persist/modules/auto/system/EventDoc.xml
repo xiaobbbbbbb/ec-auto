@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventDocDao">  
+    
+    <resultMap type="EventDoc" id="EventDocResultMap">  
+		<id 		property="did" column="did"/>
+		<id 		property="eid" column="eid"/>
+		<result 	property="title" column="title"/>
+		<result 	property="content" column="content"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventDoc" resultMap="EventDocResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_doc WHERE eid = #{eid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventDoc" resultMap="EventDocResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_doc WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventDoc" resultMap="EventDocResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_doc WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventDoc" resultMap="EventDocResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_doc WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventDocResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_doc WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventDoc" resultMap="EventDocResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_doc        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventDoc" resultMap="EventDocResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_doc WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(eid) FROM event_doc WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventDoc">
+    	<![CDATA[ 
+    		INSERT INTO event_doc(did,eid,title,content) VALUES (#{did},#{eid},#{title},#{content})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_doc SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventDoc">
+		<![CDATA[ 
+			UPDATE event_doc SET did = #{did},eid = #{eid},title = #{title},content = #{content} WHERE eid = #{eid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventDoc">
+		<![CDATA[ 
+    		DELETE FROM event_doc WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_doc WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_doc WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

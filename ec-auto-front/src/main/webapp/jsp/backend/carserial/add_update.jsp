@@ -1,0 +1,38 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../../common/base.jsp"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+<title>系统设置</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="${ctx}/media/css/backend_add_updte.css" rel="stylesheet" type="text/css"  media="screen"/>
+<script type="text/javascript">
+</script>
+</head>
+	<body>
+       <div class="iframeH">
+           <form id="form">
+           <input id="status" type="hidden" value="${status }"/>
+           <input id="id" type="hidden" value="${dto.id }"/>
+           <table class="add_update_table">
+                   <tr>
+		         <td align="right">厂牌:</td>
+		         <td class="td_left">
+		        	<select name="brandId" id="brandId">
+						<c:forEach items="${carBrandList}" var="cb" >
+						 	<option value="${cb.id }" ${cb.id==dto.brandId ?'selected="selected"':''}}>${cb.name } </option>			
+						</c:forEach>	
+	    			</select>
+                       </td>
+		      </tr>
+		      <tr>
+		         <td align="right">车系:</td>
+		         <td class="td_left">
+                           <input name="name" type="text" id="name" value="${dto.name }"  />
+                       </td>
+		      </tr>
+		  </table>
+		  </form>
+       </div>
+	</body>
+</html>

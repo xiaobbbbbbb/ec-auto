@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.AdvertisingDao">  
+    
+    <resultMap type="Advertising" id="AdvertisingResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="content" column="content"/>
+		<result 	property="status" column="status"/>
+		<result 	property="ctime" column="ctime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="Advertising" resultMap="AdvertisingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM advertising WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="Advertising" resultMap="AdvertisingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM advertising WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="Advertising" resultMap="AdvertisingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM advertising WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Advertising" resultMap="AdvertisingResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM advertising WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="AdvertisingResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM advertising WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="Advertising" resultMap="AdvertisingResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM advertising        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Advertising" resultMap="AdvertisingResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM advertising WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM advertising WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="Advertising">
+    	<![CDATA[ 
+    		INSERT INTO advertising(content,status,ctime) VALUES (#{content},#{status},#{ctime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE advertising SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="Advertising">
+		<![CDATA[ 
+			UPDATE advertising SET content = #{content},status = #{status},ctime = #{ctime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="Advertising">
+		<![CDATA[ 
+    		DELETE FROM advertising WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM advertising WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM advertising WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

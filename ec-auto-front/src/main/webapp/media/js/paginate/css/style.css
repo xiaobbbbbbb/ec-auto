@@ -1,0 +1,36 @@
+.ec-page-ul {
+    list-style-type:none;
+    margin:0px 0px 0px 0px;
+    padding:0px;
+    
+}
+.ec-page-li { 
+    display:inline;
+    float:left;
+    padding:0px;
+    margin:0px;
+    border: 1px solid #bcbcbc;
+    margin-right: 5px;
+    min-width: 12px;
+    text-align: center;
+    padding-left:3px; 
+    padding-right:3px;
+}
+.ec-page-li-current{ 
+	border: 1px solid #222222;
+	background-color:#aaaaaa; 
+	color: #222222;
+}
+
+.ec-page-li a { 
+    line-height:20px;
+    height:20px;
+    cursor:pointer;
+   	display: block;
+   	cursor: pointer;
+   	margin: 0px atuo;
+   
+}
+  
+
+

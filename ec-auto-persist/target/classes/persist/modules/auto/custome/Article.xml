@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.ArticleDao">  
+   <select id="findAegativeArticleStatisticsByGrade" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	select
+		count(grade) articleNums ,article_date mediaDate
+	from article 
+	
+	where
+	
+	${whereCond}
+	
+        ]]>
+	</select>
+	
+	 <select id="findAegativeArticleStatisticsCountByGrade" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[
+    select count(*) from (      
+	select
+		count(grade) articleNums 
+	from article 
+	
+	where
+	
+	${whereCond}
+	
+	
+	) sss
+        ]]>
+	</select>
+	
+	
+	 <select id="getArticleStatisticsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	select
+		count(a.grade) articleNums ,a.article_date media_date
+	from article a 
+
+	LEFT JOIN article_viewpoint av  ON av.article_id = a.id 
+	LEFT JOIN viewpoint v ON av.viewpoint_id = v.id
+
+	
+	where
+	
+	${whereCond}
+	GROUP BY 
+		article_date
+	ORDER BY article_date ASC
+	
+        ]]>
+	</select>
+	
+	<select id="getArticleStatisticsRankingByMediaType" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	SELECT
+		count(a.media_id) articleNums,
+		m.`name`
+	FROM
+		article a
+	LEFT JOIN 
+		media_info m ON a.media_id = m.id
+	WHERE
+		${whereCond}
+	GROUP BY
+		a.media_id
+	ORDER BY
+		articleNums DESC
+	
+        ]]>
+	</select>
+	
+	<select id="getArticleStatisticsByMediaType" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	SELECT
+		count(a.id) articleNums,article_date media_date
+
+	FROM
+		article a
+	LEFT JOIN dict_media_type  m ON a.media_type = m.id 
+	WHERE
+		${whereCond}
+	GROUP BY 
+		article_date
+        ]]>
+	</select>
+	
+	<select id="getArticleStatisticsBybrandIds" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	SELECT
+	a.id,
+	cb.`name` brand_name,
+	a.url,
+	a.title,
+	a.des_target,
+	m. NAME media_name,
+	a.article_ctime create_time,
+	s.`name` serial_name
+	FROM
+		article a
+	LEFT JOIN dict_car_brand cb ON a.brand_id = cb.id
+	LEFT JOIN media_info m ON a.media_id = m.id
+	LEFT JOIN dict_car_serial s ON a.serial_id = s.id
+	WHERE
+		${whereCond}
+        ]]>
+	</select>
+	
+	<select id="getArticleStatisticsCountsBybrandIds" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[
+         
+	SELECT
+		count(a.id)
+	FROM
+		article a
+	LEFT JOIN dict_car_brand cb ON a.brand_id = cb.id
+	LEFT JOIN media_info m ON a.media_id = m.id
+	WHERE
+		${whereCond}
+        ]]>
+	</select>
+	
+	<select id="getViewPointArticlesByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	SELECT
+		a.id,
+		a.title,
+		m.`name` media_name,
+		a.article_ctime create_time
+	FROM
+		article_viewpoint av
+	LEFT JOIN article a ON av.article_id = a.id 
+	LEFT JOIN viewpoint v ON av.viewpoint_id = v.id
+	
+	LEFT JOIN media_info m ON a.media_id = m.id
+
+	WHERE
+		${whereCond}
+        ]]>
+	</select>
+	
+	<select id="getViewPointArticleCountsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[
+         
+	SELECT
+		count(a.id)
+		
+	FROM
+		article_viewpoint av
+	LEFT JOIN article a ON av.article_id = a.id 
+	LEFT JOIN viewpoint v ON av.viewpoint_id = v.id
+	
+	LEFT JOIN media_info m ON a.media_id = m.id
+	WHERE
+		${whereCond}
+        ]]>
+	</select>
+</mapper>  

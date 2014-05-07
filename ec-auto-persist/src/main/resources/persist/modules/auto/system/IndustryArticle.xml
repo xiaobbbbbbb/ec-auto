@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.IndustryArticleDao">  
+    
+    <resultMap type="IndustryArticle" id="IndustryArticleResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="title" column="title"/>
+		<result 	property="simpleContent" column="simple_content"/>
+		<result 	property="url" column="url"/>
+		<result 	property="mediaId" column="media_id"/>
+		<result 	property="pubTime" column="pub_time"/>
+		<result 	property="ctime" column="ctime"/>
+		<result 	property="status" column="status"/>
+		<result 	property="originalId" column="original_id"/>
+		<result 	property="brandId" column="brand_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="IndustryArticle" resultMap="IndustryArticleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_article WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="IndustryArticle" resultMap="IndustryArticleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_article WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="IndustryArticle" resultMap="IndustryArticleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_article WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="IndustryArticle" resultMap="IndustryArticleResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM industry_article WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="IndustryArticleResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM industry_article WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="IndustryArticle" resultMap="IndustryArticleResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_article        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="IndustryArticle" resultMap="IndustryArticleResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM industry_article WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM industry_article WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="IndustryArticle">
+    	<![CDATA[ 
+    		INSERT INTO industry_article(title,simple_content,url,media_id,pub_time,ctime,status,original_id,brand_id) VALUES (#{title},#{simpleContent},#{url},#{mediaId},#{pubTime},#{ctime},#{status},#{originalId},#{brandId})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE industry_article SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="IndustryArticle">
+		<![CDATA[ 
+			UPDATE industry_article SET title = #{title},simple_content = #{simpleContent},url = #{url},media_id = #{mediaId},pub_time = #{pubTime},ctime = #{ctime},status = #{status},original_id = #{originalId},brand_id = #{brandId} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="IndustryArticle">
+		<![CDATA[ 
+    		DELETE FROM industry_article WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM industry_article WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM industry_article WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

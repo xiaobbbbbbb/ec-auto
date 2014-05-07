@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.DictCarSerialDao">  
+    <select id="findCarSerialCountsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Long">  
+        <![CDATA[
+		SELECT 
+			count(dcs.id) as num
+		FROM
+			dict_car_serial dcs	
+		LEFT JOIN dict_car_brand dcb ON dcb.id = dcs.brand_id
+		LEFT JOIN ral_user r ON dcs.edit_uid = r.user_id			
+		WHERE 
+		
+		${whereCond}
+        ]]>
+	</select>
+    <select id="findCarSerialByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+		SELECT 
+			dcs.id,
+			dcs.name,
+			dcs.brand_id,
+			dcs.brand_name,
+			dcs.is_valid,
+			dcs.edit_datetime editTime,
+			r.name editName,
+			dcb.type type
+		FROM
+			dict_car_serial dcs
+		LEFT JOIN dict_car_brand dcb ON dcb.id = dcs.brand_id
+		LEFT JOIN ral_user r ON dcs.edit_uid = r.user_id	
+		WHERE 
+		
+		${whereCond}
+		
+		
+        ]]>
+	</select>
+     
+	
+</mapper>  

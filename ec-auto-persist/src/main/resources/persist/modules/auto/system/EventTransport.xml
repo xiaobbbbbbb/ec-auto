@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventTransportDao">  
+    
+    <resultMap type="EventTransport" id="EventTransportResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="parentNodeId" column="parent_node_id"/>
+		<result 	property="childNodeId" column="child_node_id"/>
+		<result 	property="childNodeidList" column="child_nodeid_list"/>
+		<result 	property="pubdate" column="pubdate"/>
+		<result 	property="relationcount" column="relationcount"/>
+		<result 	property="type" column="type"/>
+		<result 	property="isroot" column="isroot"/>
+		<result 	property="inserttime" column="inserttime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventTransport" resultMap="EventTransportResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_transport WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventTransport" resultMap="EventTransportResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_transport WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventTransport" resultMap="EventTransportResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_transport WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventTransport" resultMap="EventTransportResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_transport WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventTransportResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_transport WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventTransport" resultMap="EventTransportResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_transport        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventTransport" resultMap="EventTransportResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_transport WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM event_transport WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventTransport">
+    	<![CDATA[ 
+    		INSERT INTO event_transport(eid,parent_node_id,child_node_id,child_nodeid_list,pubdate,relationcount,type,isroot,inserttime) VALUES (#{eid},#{parentNodeId},#{childNodeId},#{childNodeidList},#{pubdate},#{relationcount},#{type},#{isroot},#{inserttime})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_transport SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventTransport">
+		<![CDATA[ 
+			UPDATE event_transport SET eid = #{eid},parent_node_id = #{parentNodeId},child_node_id = #{childNodeId},child_nodeid_list = #{childNodeidList},pubdate = #{pubdate},relationcount = #{relationcount},type = #{type},isroot = #{isroot},inserttime = #{inserttime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventTransport">
+		<![CDATA[ 
+    		DELETE FROM event_transport WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_transport WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_transport WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

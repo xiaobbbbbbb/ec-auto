@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.ecarinfo.auto</groupId>
+		<artifactId>ec-auto</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ec-auto-front</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>ec-auto-front Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<dependencies>
+		<dependency>
+		
+			<groupId>com.ecarinfo.auto</groupId>
+			<artifactId>ec-auto-service</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-ehcache</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+		</dependency>
+		
+
+		<!-- junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+		</dependency>
+
+	
+	<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+		</dependency>
+
+		<!-- Joda Time Library -->
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<!-- Jackson JSON Processor -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+		<!-- Logging -->
+		<!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-log4j12</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-api</artifactId> 
+			</dependency> <dependency> <groupId>org.apache.directory.studio</groupId> 
+			<artifactId>org.slf4j.log4j12</artifactId> </dependency> -->
+
+		<!-- 监控组件 -->
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>1.48.0</version>
+		</dependency>
+
+		<!-- itext, option to add PDF export -->
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>bcmail-jdk14</artifactId>
+					<groupId>bouncycastle</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bcprov-jdk14</artifactId>
+					<groupId>bouncycastle</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>bctsp-jdk14</artifactId>
+					<groupId>bouncycastle</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- solr -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-solrj</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>auto.ecarinfo.serach</groupId>
+		  <artifactId>apache-solr-solrj</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>auto.ecarinfo.serach</groupId>
+		  <artifactId>connClient</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>auto.ecarinfo.serach</groupId>
+		  <artifactId>IKAnalyzer</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>auto.ecarinfo.serach</groupId>
+		  <artifactId>IndexSearch</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>auto.ecarinfo.serach</groupId>
+		  <artifactId>lucene_core</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>auto.ecarinfo.serach</groupId>
+		  <artifactId>TSTranslate</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.google.code.gson</groupId>
+		  <artifactId>gson</artifactId>
+		  <version>1.7.1</version>
+		</dependency>
+            
+	</dependencies>
+</project>

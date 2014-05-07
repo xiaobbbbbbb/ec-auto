@@ -1,0 +1,52 @@
+.ask_table_action_blue{
+	background: #1597DB;color: white;width: 30px;
+	height: 41px;
+	
+}
+.ask_table_action_blues{
+	border-right: 1px solid #bcbcbc;
+	font-size: 15px;
+}
+.ask_table_checked_oragin_title{
+	background: #FF6600;color: white;
+	font-size: 15px;
+}
+.ask_table_normal_title{
+	color: #FF6600;
+	border-left: 1px solid #bcbcbc;
+	background-color: #fcf8f9;
+	font-size: 15px;
+}
+.ask_kbfx_qst{
+	width: 310px;
+	height:290px;
+	border: none;
+	float: left;
+	margin-top: 10px;
+}
+.ask_kbfx_qttj{
+	width: 400px;
+	float: right;
+	margin-top: 15px;
+	margin-right: 5px;
+	margin-bottom: 15px;
+}
+.ask_th_border{
+	font-size: 13px;
+	background-color: #fcf8f9;
+	font-weight: bold;
+	text-align: center;
+	border-bottom: 1px solid #bcbcbc;
+	border-right: 1px solid #bcbcbc;
+	border-top:1px solid #bcbcbc;
+	border-left: 1px solid #bcbcbc;
+	height: 30px;
+}
+.ask_td_border{
+	text-align: center;
+	font-size: 12px;
+	border-bottom: 1px solid #bcbcbc;
+	border-right: 1px solid #bcbcbc;
+	border-left: 1px solid #bcbcbc;
+	height: 30px;
+}

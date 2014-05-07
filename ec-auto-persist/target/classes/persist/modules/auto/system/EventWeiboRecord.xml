@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventWeiboRecordDao">  
+    
+    <resultMap type="EventWeiboRecord" id="EventWeiboRecordResultMap">  
+		<id 		property="eid" column="eid"/>
+		<result 	property="indextime" column="indextime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventWeiboRecord" resultMap="EventWeiboRecordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_weibo_record WHERE eid = #{eid}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventWeiboRecord" resultMap="EventWeiboRecordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_weibo_record WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventWeiboRecord" resultMap="EventWeiboRecordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_weibo_record WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventWeiboRecord" resultMap="EventWeiboRecordResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_weibo_record WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventWeiboRecordResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_weibo_record WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventWeiboRecord" resultMap="EventWeiboRecordResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_weibo_record        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventWeiboRecord" resultMap="EventWeiboRecordResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_weibo_record WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(eid) FROM event_weibo_record WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventWeiboRecord">
+    	<![CDATA[ 
+    		INSERT INTO event_weibo_record(eid,indextime) VALUES (#{eid},#{indextime})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_weibo_record SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventWeiboRecord">
+		<![CDATA[ 
+			UPDATE event_weibo_record SET eid = #{eid},indextime = #{indextime} WHERE eid = #{eid}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventWeiboRecord">
+		<![CDATA[ 
+    		DELETE FROM event_weibo_record WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_weibo_record WHERE eid = #{eid}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_weibo_record WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

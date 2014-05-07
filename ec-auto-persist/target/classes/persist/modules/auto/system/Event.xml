@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventDao">  
+    
+    <resultMap type="Event" id="EventResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="titile" column="titile"/>
+		<result 	property="keywords" column="keywords"/>
+		<result 	property="type" column="type"/>
+		<result 	property="startTime" column="start_time"/>
+		<result 	property="endTime" column="end_time"/>
+		<result 	property="contents" column="contents"/>
+		<result 	property="status" column="status"/>
+		<result 	property="imgUrl" column="img_url"/>
+		<result 	property="firstArticleId" column="first_article_id"/>
+		<result 	property="firstArticleTime" column="first_article_time"/>
+		<result 	property="ctime" column="ctime"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="Event" resultMap="EventResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="Event" resultMap="EventResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="Event" resultMap="EventResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Event" resultMap="EventResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="Event" resultMap="EventResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="Event" resultMap="EventResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM event WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="Event">
+    	<![CDATA[ 
+    		INSERT INTO event(titile,keywords,type,start_time,end_time,contents,status,img_url,first_article_id,first_article_time,ctime) VALUES (#{titile},#{keywords},#{type},#{startTime},#{endTime},#{contents},#{status},#{imgUrl},#{firstArticleId},#{firstArticleTime},#{ctime})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="Event">
+		<![CDATA[ 
+			UPDATE event SET titile = #{titile},keywords = #{keywords},type = #{type},start_time = #{startTime},end_time = #{endTime},contents = #{contents},status = #{status},img_url = #{imgUrl},first_article_id = #{firstArticleId},first_article_time = #{firstArticleTime},ctime = #{ctime} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="Event">
+		<![CDATA[ 
+    		DELETE FROM event WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM event WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

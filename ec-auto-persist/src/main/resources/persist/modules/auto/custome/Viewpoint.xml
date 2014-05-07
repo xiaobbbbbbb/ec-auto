@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.ViewpointDao">  
+    
+    <select id="findViewpointsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	SELECT
+		count(v.`name`) articleNums,v.name,v.affection,v.id 
+	FROM
+		article_viewpoint av
+	LEFT JOIN article a ON av.article_id = a.id 
+	LEFT JOIN viewpoint v ON av.viewpoint_id = v.id
+		
+	WHERE 
+	
+	${whereCond}
+        ]]>
+	</select>
+	
+	<select id="findActiclViewpointsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	SELECT
+	v.id,v.`name`,v.affection,a.title,a.article_ctime ctime,a.media_id,m.`name` as media_name
+	FROM
+		article_viewpoint av
+	LEFT JOIN article a ON av.article_id = a.id 
+	LEFT JOIN viewpoint v ON av.viewpoint_id = v.id
+	left JOIN media_info m on a.media_id = m.id
+		
+	WHERE 
+	
+	${whereCond}
+        ]]>
+	</select>
+	
+	<select id="findActiclViewpointsCountsByCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[
+         
+	SELECT
+		count(a.id)
+	FROM
+		article_viewpoint av
+	LEFT JOIN article a ON av.article_id = a.id 
+	LEFT JOIN viewpoint v ON av.viewpoint_id = v.id
+	left JOIN media_info m on a.media_id = m.id
+		
+	WHERE 
+	
+	${whereCond}
+        ]]>
+	</select>
+	
+	<select id="getViewpointsByProvince" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="hashmap">  
+        <![CDATA[
+         
+	select count(a.provice_id) articleNums ,p.`name` from article a 
+	left join article_viewpoint av on a.id = av.id
+	LEFT join viewpoint v on v.id = av.viewpoint_id
+	LEFT JOIN dict_province p on a.provice_id= p.id
+		
+	WHERE 
+	
+	${whereCond}
+	
+	GROUP BY a.provice_id
+	
+        ]]>
+	</select>
+</mapper>  

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.IndustryCloudDao">  
+    
+    <resultMap type="IndustryCloud" id="IndustryCloudResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="industryArticleId" column="industry_article_id"/>
+		<result 	property="cloudId" column="cloud_id"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="IndustryCloud" resultMap="IndustryCloudResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_cloud WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="IndustryCloud" resultMap="IndustryCloudResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_cloud WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="IndustryCloud" resultMap="IndustryCloudResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_cloud WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="IndustryCloud" resultMap="IndustryCloudResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM industry_cloud WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="IndustryCloudResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM industry_cloud WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="IndustryCloud" resultMap="IndustryCloudResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM industry_cloud        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="IndustryCloud" resultMap="IndustryCloudResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM industry_cloud WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM industry_cloud WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="IndustryCloud">
+    	<![CDATA[ 
+    		INSERT INTO industry_cloud(industry_article_id,cloud_id) VALUES (#{industryArticleId},#{cloudId})    		
+        ]]> 
+        <selectKey resultType="Long" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE industry_cloud SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="IndustryCloud">
+		<![CDATA[ 
+			UPDATE industry_cloud SET industry_article_id = #{industryArticleId},cloud_id = #{cloudId} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="IndustryCloud">
+		<![CDATA[ 
+    		DELETE FROM industry_cloud WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Long">
+		<![CDATA[ 
+    		DELETE FROM industry_cloud WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM industry_cloud WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

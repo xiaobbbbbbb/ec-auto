@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventDcsCommentDao">  
+    
+    <resultMap type="EventDcsComment" id="EventDcsCommentResultMap">  
+		<id 		property="id" column="id"/>
+		<result 	property="recordDate" column="record_date"/>
+		<result 	property="commentNum" column="comment_num"/>
+		<result 	property="updateTime" column="update_time"/>
+		<result 	property="eid" column="eid"/>
+		<result 	property="commentType" column="comment_type"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventDcsComment" resultMap="EventDcsCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_dcs_comment WHERE id = #{id}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventDcsComment" resultMap="EventDcsCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_dcs_comment WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventDcsComment" resultMap="EventDcsCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_dcs_comment WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventDcsComment" resultMap="EventDcsCommentResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_dcs_comment WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventDcsCommentResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_dcs_comment WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventDcsComment" resultMap="EventDcsCommentResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_dcs_comment        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventDcsComment" resultMap="EventDcsCommentResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_dcs_comment WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(id) FROM event_dcs_comment WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventDcsComment">
+    	<![CDATA[ 
+    		INSERT INTO event_dcs_comment(record_date,comment_num,update_time,eid,comment_type) VALUES (#{recordDate},#{commentNum},#{updateTime},#{eid},#{commentType})    		
+        ]]> 
+        <selectKey resultType="Integer" order="AFTER" keyProperty="id">
+			SELECT LAST_INSERT_ID() AS ID    
+		</selectKey>
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_dcs_comment SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventDcsComment">
+		<![CDATA[ 
+			UPDATE event_dcs_comment SET record_date = #{recordDate},comment_num = #{commentNum},update_time = #{updateTime},eid = #{eid},comment_type = #{commentType} WHERE id = #{id}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventDcsComment">
+		<![CDATA[ 
+    		DELETE FROM event_dcs_comment WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Integer">
+		<![CDATA[ 
+    		DELETE FROM event_dcs_comment WHERE id = #{id}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_dcs_comment WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  

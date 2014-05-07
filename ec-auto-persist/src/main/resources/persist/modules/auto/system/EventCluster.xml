@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper  
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"  
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="com.ecarinfo.auto.dao.EventClusterDao">  
+    
+    <resultMap type="EventCluster" id="EventClusterResultMap">  
+		<id 		property="eventId" column="event_id"/>
+		<id 		property="inserttime" column="inserttime"/>
+		<result 	property="pubdate" column="pubdate"/>
+		<result 	property="site" column="site"/>
+		<result 	property="type" column="type"/>
+		<result 	property="classid" column="classid"/>
+		 
+    </resultMap>
+    
+    <select id="findByPK"  resultType="EventCluster" resultMap="EventClusterResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_cluster WHERE inserttime = #{inserttime}        	
+        ]]>   
+    </select>
+    
+    <select id="findOneByAttr" resultType="EventCluster" resultMap="EventClusterResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_cluster WHERE `${fieldName}` = #{value} limit 1        	
+        ]]>
+    </select>
+    
+    <select id="findByAttr" resultType="EventCluster" resultMap="EventClusterResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_cluster WHERE `${fieldName}` = #{value}        	
+        ]]>
+    </select>
+    
+    <select id="findOne" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventCluster" resultMap="EventClusterResultMap">  
+        <![CDATA[ 
+        	SELECT ${selectFields} FROM event_cluster WHERE ${uniqueWhereCond}        	
+        ]]>
+    </select>
+    
+    <select id="findMap" parameterType="com.ecarinfo.persist.criteria.Criteria" resultMap="EventClusterResultMap">  
+        <![CDATA[ 
+		    SELECT ${selectFields} FROM event_cluster WHERE ${whereCond}
+        ]]>
+    </select>
+    
+    <select id="findAll" resultType="EventCluster" resultMap="EventClusterResultMap">  
+        <![CDATA[ 
+        	SELECT * FROM event_cluster        	
+        ]]>
+    </select>
+    
+    <select id="findList" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="EventCluster" resultMap="EventClusterResultMap">  
+        <![CDATA[ 
+      	 	SELECT ${selectFields} FROM event_cluster WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <select id="count" parameterType="com.ecarinfo.persist.criteria.Criteria" resultType="long">  
+        <![CDATA[ 
+      	 	SELECT COUNT(inserttime) FROM event_cluster WHERE ${whereCond}      	 	
+        ]]>
+    </select>
+    
+    <insert id="insert" parameterType="EventCluster">
+    	<![CDATA[ 
+    		INSERT INTO event_cluster(event_id,pubdate,site,type,classid,inserttime) VALUES (#{eventId},#{pubdate},#{site},#{type},#{classid},#{inserttime})    		
+        ]]> 
+    </insert>
+	
+	<update id="updateWithCriteria" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+		UPDATE event_cluster SET ${updateField} WHERE ${whereCond}	
+		]]> 	
+	</update>
+	
+	<update id="update" parameterType="EventCluster">
+		<![CDATA[ 
+			UPDATE event_cluster SET event_id = #{eventId},pubdate = #{pubdate},site = #{site},type = #{type},classid = #{classid},inserttime = #{inserttime} WHERE inserttime = #{inserttime}
+		]]> 	
+	</update>
+	
+	<delete id="deleteEntity" parameterType="EventCluster">
+		<![CDATA[ 
+    		DELETE FROM event_cluster WHERE inserttime = #{inserttime}    		
+        ]]> 
+	</delete>
+	
+	<delete id="deleteByPK" parameterType="Date">
+		<![CDATA[ 
+    		DELETE FROM event_cluster WHERE inserttime = #{inserttime}    		
+        ]]> 
+	</delete>
+	
+	<delete id="delete" parameterType="com.ecarinfo.persist.criteria.Criteria">
+		<![CDATA[ 
+    		DELETE FROM event_cluster WHERE ${whereCond}     		
+        ]]> 
+	</delete>
+	
+</mapper>  
